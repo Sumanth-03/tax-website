@@ -11,7 +11,7 @@ function Inputs ({inputName, setValue}){
         setisSelected(!isSelected);
     }
     return(
-      <section className=" mt-4">
+      <section className="p-2 rounded-3 mt-4 bg-color-white">
         <button className="btn  w-100" type="button" onClick={handleClick} >
           <img src={icon} alt="Icon" className="me-2 float-start" />
           {inputName}

@@ -57,8 +57,8 @@ const Process = () => {
     <Header></Header>
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-12 col-lg-6">
-            <div>
+        <div className="col-12 col-lg-6 p-0">
+            <div className='mb-2 p-3'>
                 <section className="m-4">
                     <h1>Process</h1>
                     <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique aliquid laborum earum?</p>
@@ -86,8 +86,8 @@ const Process = () => {
                     </span>
                 </section>
             </div>
-            <footer>
-                <form onSubmit={handleSubmit}>
+            <footer className='bg-color-gray m-0 p-4'>
+                <form onSubmit={handleSubmit} className='mt-2'>
                     <div className="mb-3">
                     <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
                     <input
