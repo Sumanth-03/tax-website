@@ -1,7 +1,7 @@
 import React from "react";
 
-import logo from '../Assets/Logo.png'
-import Image1 from '../Assets/Mask group.png'
+import logo from '../Assets/Logo.svg'
+import Image1 from '../Assets/headImage.svg'
 
 function Header (){
     return(

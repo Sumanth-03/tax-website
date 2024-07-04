@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import icon from '../Assets/1.png'
+import icon from '../Assets/tickWithDot.svg'
+import iconLast from '../Assets/tik.svg'
 import Header from './Header';
 import { useState } from 'react';
 
@@ -76,7 +77,7 @@ const Process = () => {
                     <span>More than one form 16</span>
                 </div>
                 <div>
-                    <img src={icon} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
+                    <img src={iconLast} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
                     <span>Business income</span>
                 </div>
                 <section className='m-1 p-4 border'>

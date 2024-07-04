@@ -1,14 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import ToggleIconSelected from '../Assets/Read more.png';
-import ToggleIcon from '../Assets/Read more 1.png';
-import icon from '../Assets/Icon.png';
+import ToggleIconSelected from '../Assets/IconSelected.svg';
+import ToggleIcon from '../Assets/IconUnSelected.svg';
+import icon from '../Assets/Icon.svg';
 
 function Inputs ({inputName, setValue}){
     const [isSelected, setisSelected] = useState(false);
     const handleClick = () =>{
         setValue(inputName)
-        setisSelected(!isSelected);
+        setisSelected((pre)=>{
+            return !pre;
+        });
     }
     return(
       <section className="p-2 rounded-3 mt-4 bg-color-white">
@@ -16,8 +18,8 @@ function Inputs ({inputName, setValue}){
           <img src={icon} alt="Icon" className="me-2 float-start" />
           {inputName}
           {isSelected ? 
-              <img src={ToggleIcon} alt="Toggle Icon Open" className="ms-2 float-end" /> :
-              <img src={ToggleIconSelected} alt="Toggle Icon Closed" className="ms-2 float-end" />
+              <span className='float-end'><span className='green-text'>Select</span><img src={ToggleIconSelected} alt="Toggle Icon Open" className="ms-2" /></span> :
+              <span className='float-end'><span className='gray-text'>Select</span><img src={ToggleIcon} alt="Toggle Icon Closed" className="ms-2" /></span>
           }    
         </button>
       </section>
