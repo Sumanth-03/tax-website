@@ -13,14 +13,14 @@ const Home = () => {
     <div>
       <Header></Header>
 
-      <div className="container mt-4 text-center">
+      <main className="container mt-4 text-center">
         <img src={Image2} alt="Spaced" className="img-fluid rounded  mb-4" />
         <div>
-          <button className="btn  rounded-pill button-1" onClick={handleContinue}>
+          <button className="btn m-2 rounded-pill button-1" onClick={handleContinue}>
             Continue
           </button>
         </div>
-      </div>
+      </main>
 
     </div>
     

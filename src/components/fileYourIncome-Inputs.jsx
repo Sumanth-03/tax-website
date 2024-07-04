@@ -4,12 +4,15 @@ import ToggleIconSelected from '../Assets/Read more.png';
 import ToggleIcon from '../Assets/Read more 1.png';
 import icon from '../Assets/Icon.png';
 
-function Inputs ({inputName}){
+function Inputs ({inputName, setValue}){
     const [isSelected, setisSelected] = useState(false);
-    const handleClick = () => setisSelected(!isSelected);
+    const handleClick = () =>{
+        setValue(inputName)
+        setisSelected(!isSelected);
+    }
     return(
-      <div className=" mt-4">
-        <button className="btn  w-100" type="button" onClick={handleClick}>
+      <section className=" mt-4">
+        <button className="btn  w-100" type="button" onClick={handleClick} >
           <img src={icon} alt="Icon" className="me-2 float-start" />
           {inputName}
           {isSelected ? 
@@ -17,7 +20,7 @@ function Inputs ({inputName}){
               <img src={ToggleIconSelected} alt="Toggle Icon Closed" className="ms-2 float-end" />
           }    
         </button>
-      </div>
+      </section>
     )
 }
 export default Inputs
