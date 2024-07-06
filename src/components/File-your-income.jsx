@@ -20,17 +20,29 @@ const FileYourIncome = () => {
   })
   console.log(selectedState)
   const [clickedAny, setClickedAny] = useState(false)
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState([false, false, false]);
+  const [incomes, setIncomes] = useState([0,0,0,0]);
 
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const toggleDropdown = (n) => {
+    let newDrop = [...dropdownOpen];
+    newDrop[n] = !dropdownOpen[n];
+    setDropdownOpen(newDrop);
+    if(newDrop[n] === false){
+      let newInc = [...incomes];
+      newInc[n] = 0;
+      setIncomes(newInc);
+    }
+  }
   useEffect(() => {
-    if (
-      selectedState.salaried_income['One form 16'] || 
-      selectedState.salaried_income['More than one form 16'] || 
-      selectedState['Capital gains'] ||
-      selectedState['House rental income'] || 
-      selectedState['Business income']
-    ) {
+    // if (
+    //   selectedState.salaried_income['One form 16'] || 
+    //   selectedState.salaried_income['More than one form 16'] || 
+    //   selectedState['Capital gains'] ||
+    //   selectedState['House rental income'] || 
+    //   selectedState['Business income']
+    // )
+    if(incomes.filter(s => s > 0).length >= 1)
+    {
       setClickedAny(true);
     } else {
       setClickedAny(false);
@@ -38,30 +50,53 @@ const FileYourIncome = () => {
   }, [selectedState]);
   
   const setValue = (name) => {
-    setSelectedState((pre) => {
-        const previousValue = pre[name]; 
-        return { ...pre, [name]: !previousValue };
-    });
+    // setSelectedState((pre) => {
+    //     const previousValue = pre[name]; 
+    //     return { ...pre, [name]: !previousValue };
+    // });
+    
+      let newInc = [...incomes];
+      if(newInc[3] === 0){
+        newInc[3] = 41;
+      }
+      else{
+        newInc[3] = 0;
+      }
+      setIncomes(newInc);
+    
 
   }
-  const handleRadioClick = (name)=>{
-    setSelectedState((pre)=>{
-        const modified ={'One form 16': false,'More than one form 16':false}
-        return { ...pre,
-              salaried_income: {
-              ...modified,  
-              [name]: !pre.salaried_income[name]
-            }}
-    })
+  const handleRadioClick = (pos, value)=>{
+    // setSelectedState((pre)=>{
+    //     const modified ={'One form 16': false,'More than one form 16':false}
+    //     return { ...pre,
+    //           salaried_income: {
+    //           ...modified,  
+    //           [name]: !pre.salaried_income[name]
+    //         }}
+    // })
+    let newInc = [...incomes];
+    newInc[pos] = value;
+    setIncomes(newInc);
+
   }
   const handleContinue = () => {
-    makeApiCallWithAuth('getPricing',{income: 11})
+
+    for (let i = incomes.length - 1; i >= 0; i--) {
+      if (incomes[i] === 0) {
+        incomes.splice(i, 1);
+      }
+    }
+    
+    if(incomes[0]){
+    makeApiCallWithAuth('getPricing',{income: incomes})
     .then((response) => {
       console.log(response?.data)
       if(response?.data?.data){
-        sessionStorage.setItem('pricing',JSON.stringify(response.data.data[0]))
+        sessionStorage.setItem('pricing',JSON.stringify(response.data.data))
         navigate('/process');
       }
+      
       // if(response?.data?.data?.url){
       //   let paymenturl = response.data.data.url;
       //   setIsloading(false);
@@ -83,6 +118,12 @@ const FileYourIncome = () => {
        
     })
     .catch((e) => {console.log("err", e);})
+
+  }
+  else{
+    let newInc = [0,0,0,0];
+    setIncomes(newInc);
+  }
    
     
   };
@@ -99,28 +140,28 @@ const FileYourIncome = () => {
             </section>
             <div  className ={`custom-container overflow-auto ${ clickedAny ? 'extra-height':''}` }>
                 <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
-                    <button className="btn  w-100" type="button" onClick={toggleDropdown}>
+                    <button className="btn  w-100" type="button" onClick={()=>{toggleDropdown(0)}}>
                     <img src={icon} alt="Icon" className="me-2 float-start" />
                     <span>Salaried Income</span>
-                    {dropdownOpen ? 
+                    {dropdownOpen[0] ? 
                         <span className='float-end'><span className='green-text'>Select</span><img src={ToggleIconSelected} alt="Toggle Icon Open" className="ms-2" /></span> :
                         <span className='float-end'><span className='gray-text'>Select</span><img src={ToggleIcon} alt="Toggle Icon Closed" className="ms-2" /></span>
                     }    
                     </button>
-                    {dropdownOpen && (
+                    {dropdownOpen[0] && (
                     <div className="dropdown-menu show position-static w-100">
                         <div className="dropdown-item border-bottom p-2 ">
                         <label className="form-check radio">
-                            <input type="radio" name="options" value="option1" className="form-check-input float-end radio-input"  
-                            onClick={()=>handleRadioClick('One form 16')}
+                            <input type="radio" name="options1" value="11" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick(0, 11)}
                             />
                             Single Form 16
                         </label>
                         </div>
                         <div className="dropdown-item p-2 rm-blue-blink">
                         <label className="form-check radio">
-                            <input type="radio" name="options" value="option2" className="form-check-input float-end radio-input"  
-                            onClick={()=>handleRadioClick('More than one form 16')}
+                            <input type="radio" name="options1" value="12" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick(0, 12)}
                             />
                             Multiple Form 16
                         </label>
@@ -131,28 +172,28 @@ const FileYourIncome = () => {
                 
 
                 <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
-                    <button className="btn  w-100" type="button" onClick={toggleDropdown}>
+                    <button className="btn  w-100" type="button" onClick={()=>{toggleDropdown(1)}}>
                     <img src={icon} alt="Icon" className="me-2 float-start" />
                     <span>Property Rental Income</span>
-                    {dropdownOpen ? 
+                    {dropdownOpen[1] ? 
                         <span className='float-end'><span className='green-text'>Select</span><img src={ToggleIconSelected} alt="Toggle Icon Open" className="ms-2" /></span> :
                         <span className='float-end'><span className='gray-text'>Select</span><img src={ToggleIcon} alt="Toggle Icon Closed" className="ms-2" /></span>
                     }    
                     </button>
-                    {dropdownOpen && (
+                    {dropdownOpen[1] && (
                     <div className="dropdown-menu show position-static w-100">
                         <div className="dropdown-item border-bottom p-2 ">
                         <label className="form-check radio">
-                            <input type="radio" name="options" value="option1" className="form-check-input float-end radio-input"  
-                            onClick={()=>handleRadioClick('One form 16')}
+                            <input type="radio" name="options2" value="21" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick(1, 21)}
                             />
                             One House / Property
                         </label>
                         </div>
                         <div className="dropdown-item p-2 rm-blue-blink">
                         <label className="form-check radio">
-                            <input type="radio" name="options" value="option2" className="form-check-input float-end radio-input"  
-                            onClick={()=>handleRadioClick('More than one form 16')}
+                            <input type="radio" name="options2" value="22" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick(1, 22)}
                             />
                             Multiple Houses / Properties
                         </label>
@@ -163,28 +204,28 @@ const FileYourIncome = () => {
 
 
                 <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
-                    <button className="btn  w-100" type="button" onClick={toggleDropdown}>
+                    <button className="btn  w-100" type="button" onClick={()=>{toggleDropdown(2)}}>
                     <img src={icon} alt="Icon" className="me-2 float-start" />
                     <span className=''>Capital Gain on Sale of Shares</span>
-                    {dropdownOpen ? 
+                    {dropdownOpen[2] ? 
                         <span className='float-end'><span className='green-text'>Select</span><img src={ToggleIconSelected} alt="Toggle Icon Open" className="ms-2" /></span> :
                         <span className='float-end'><span className='gray-text'>Select</span><img src={ToggleIcon} alt="Toggle Icon Closed" className="ms-2" /></span>
                     }    
                     </button>
-                    {dropdownOpen && (
+                    {dropdownOpen[2] && (
                     <div className="dropdown-menu show position-static w-100">
                         <div className="dropdown-item border-bottom p-2 ">
                         <label className="form-check radio">
-                            <input type="radio" name="options" value="option1" className="form-check-input float-end radio-input"  
-                            onClick={()=>handleRadioClick('One form 16')}
+                            <input type="radio" name="options3" value="31" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick(2, 31)}
                             />
                             Upto 100 Transactions
                         </label>
                         </div>
                         <div className="dropdown-item p-2 rm-blue-blink">
                         <label className="form-check radio">
-                            <input type="radio" name="options" value="option2" className="form-check-input float-end radio-input"  
-                            onClick={()=>handleRadioClick('More than one form 16')}
+                            <input type="radio" name="options3" value="32" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick(2, 32)}
                             />
                             More than 100 Transactions
                         </label>
@@ -205,7 +246,7 @@ const FileYourIncome = () => {
                     <strong>Terms and Conditions</strong>
                 </p>
                 
-                <button className="btn button-1 rounded-pill m-2" onClick={handleContinue}>
+                <button className="btn button-1 rounded-pill m-2" onClick={handleContinue} >
                     Continue
                 </button>
             </footer>
