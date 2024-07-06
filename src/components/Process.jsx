@@ -14,6 +14,7 @@ const Process = () => {
   const [isloading, setIsloading] = useState(false);
   const [modal, setModal] = useState('')
   const [errmessage, setErrmessage] = useState('')
+  
 
   const queryParams = new URLSearchParams(window.location.search);
   const hdnRefNumber = queryParams.get('hdnRefNumber');
@@ -36,6 +37,7 @@ const Process = () => {
     .then((response) => {
       console.log("getpayres",response.data)
       if(response?.data?.status === 200){
+        setIsloading(false);
         navigate('/thank-you');
       }
       else{
@@ -94,8 +96,10 @@ const Process = () => {
   };
 
   const handleContinue = () => {
+    setIsloading(true);
     makeApiCallWithAuth('validationCheck',{income: 11, phone: phoneNumber, mail: email})
     .then((response) => {
+      setIsloading(false);
       console.log(response?.data)
      
       if(response?.data?.data?.url){
@@ -116,7 +120,7 @@ const Process = () => {
       }
        
     })
-    .catch((e) => {console.log("err", e);})
+    .catch((e) => {console.log("err", e); setIsloading(false);})
     
   };
 
@@ -124,6 +128,13 @@ const Process = () => {
     <>
     <Header></Header>
     <div className="container">
+    {isloading && <div className="spinner-overlay z-30">
+          <div className="spinner-container">
+            <div class="spinner-border" role="status">
+            
+          </div>
+          </div>
+      </div>}
       <div className="row justify-content-center">
         <div className="col-12 col-lg-6 p-0">
             <div className='mb-2 p-3'>

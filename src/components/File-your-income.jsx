@@ -6,6 +6,7 @@ import ToggleIconSelected from '../Assets/IconSelected.svg';
 import ToggleIcon from '../Assets/IconUnSelected.svg';
 import Inputs from './fileYourIncome-Inputs';
 import { makeApiCallWithAuth } from '../Services/Api';
+import "./style.css"
 
 const FileYourIncome = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const FileYourIncome = () => {
   const [clickedAny, setClickedAny] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState([false, false, false]);
   const [incomes, setIncomes] = useState([0,0,0,0]);
+  const [isloading, setIsloading] = useState(false);
 
   const toggleDropdown = (n) => {
     let newDrop = [...dropdownOpen];
@@ -89,8 +91,10 @@ const FileYourIncome = () => {
     }
     
     if(incomes[0]){
+      setIsloading(true)
     makeApiCallWithAuth('getPricing',{income: incomes})
     .then((response) => {
+      setIsloading(false)
       console.log(response?.data)
       if(response?.data?.data){
         sessionStorage.setItem('pricing',JSON.stringify(response.data.data))
@@ -117,7 +121,7 @@ const FileYourIncome = () => {
       // }
        
     })
-    .catch((e) => {console.log("err", e);})
+    .catch((e) => {console.log("err", e); setIsloading(false)})
 
   }
   else{
@@ -132,6 +136,13 @@ const FileYourIncome = () => {
     <>
     <Header />
     <div className="container">
+    {isloading && <div className="spinner-overlay z-30">
+          <div className="spinner-container">
+            <div class="spinner-border" role="status">
+            
+          </div>
+          </div>
+      </div>}
       <div className="row justify-content-center">
         <div className="col-12 col-lg-6 bg-color-gray" >
             <section className="m-4">
