@@ -23,6 +23,7 @@ const Process = () => {
 
 
   const pricing = JSON.parse(sessionStorage.pricing);
+  const inco = JSON.parse(sessionStorage.inco)
   const orderId = sessionStorage.getItem('id');
 
   if(hdnRefNumber && !modal && !isloading){
@@ -97,7 +98,7 @@ const Process = () => {
 
   const handleContinue = () => {
     setIsloading(true);
-    makeApiCallWithAuth('validationCheck',{income: 11, phone: phoneNumber, mail: email})
+    makeApiCallWithAuth('validationCheck',{income: inco, phone: phoneNumber, mail: email})
     .then((response) => {
       setIsloading(false);
       console.log(response?.data)

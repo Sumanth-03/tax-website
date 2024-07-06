@@ -91,6 +91,7 @@ const FileYourIncome = () => {
     }
     
     if(incomes[0]){
+      sessionStorage.setItem('inco',JSON.stringify(incomes))
       setIsloading(true)
     makeApiCallWithAuth('getPricing',{income: incomes})
     .then((response) => {
