@@ -4,12 +4,56 @@ import icon from '../Assets/tickWithDot.svg'
 import iconLast from '../Assets/tik.svg'
 import Header from './Header';
 import { useState } from 'react';
+import { makeApiCallWithAuth } from '../Services/Api';
 
 const Process = () => {
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState({ phoneNumber: '', email: '' });
+  const [isloading, setIsloading] = useState(false);
+  const [modal, setModal] = useState('')
+  const [errmessage, setErrmessage] = useState('')
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const hdnRefNumber = queryParams.get('hdnRefNumber');
+  const transactionId = queryParams.get('transactionId');
+  const amount = queryParams.get('amount');
+
+
+  const pricing = JSON.parse(sessionStorage.pricing);
+  const orderId = sessionStorage.getItem('id');
+
+  if(hdnRefNumber && !modal && !isloading){
+    setIsloading(true);
+    let data ={
+      order_id: hdnRefNumber,
+      razorpay_payment_id: transactionId,
+      razorpay_amount: amount,
+      filing_id: orderId,
+    }
+    makeApiCallWithAuth('checkPaymentStatus', data)
+    .then((response) => {
+      console.log("getpayres",response.data)
+      if(response?.data?.status === 200){
+        navigate('/thank-you');
+      }
+      else{
+        if(!modal){
+        setModal('failed')
+        setErrmessage(response.data?.message)
+        setIsloading(false);
+        }
+      }
+
+    })
+    .catch((e) => {console.log("err", e); setIsloading(false);})
+
+    
+    }
+
+
+
 
   const validatePhoneNumber = (number) => {
     const phoneRegex = /^[0-9]{10}$/;
@@ -50,7 +94,30 @@ const Process = () => {
   };
 
   const handleContinue = () => {
-    navigate('/thank-you');
+    makeApiCallWithAuth('validationCheck',{income: 11, phone: phoneNumber, mail: email})
+    .then((response) => {
+      console.log(response?.data)
+     
+      if(response?.data?.data?.url){
+
+        sessionStorage.setItem('id', response.data.data.orderId);
+        let paymenturl = response.data.data.url;
+       // setIsloading(false);
+        window.location.href = paymenturl;
+        }
+      
+      else{
+        // setIsloading(false);
+        // if(!modal){
+        //   setModal('failed')
+        //   setErrmessage(response.data?.message)
+        //   //setIsloading(false);
+        //   }
+      }
+       
+    })
+    .catch((e) => {console.log("err", e);})
+    
   };
 
   return (
@@ -83,7 +150,7 @@ const Process = () => {
                 <section className='m-1 p-4 border'>
                     <span><strong>Amount</strong></span>
                     <span className='float-end'>
-                    <strong><del>₹ 999</del><span style={{fontSize:'20px'}}>  ₹ 699</span></strong>
+                    <strong><del>₹ {pricing?.originalprice}</del><span style={{fontSize:'20px'}}>  ₹ {pricing?.offerprice}</span></strong>
                     </span>
                 </section>
             </div>
@@ -94,7 +161,7 @@ const Process = () => {
                     <input
                         type="text"
                         id="phoneNumber"
-                        placeholder='+91**********'
+                        placeholder='99********'
                         className={`form-control rounded-pill ${errors.phoneNumber ? 'is-invalid' : ''}`}
                         value={phoneNumber}
                         onChange={handlePhoneNumberChange}
@@ -106,7 +173,7 @@ const Process = () => {
                     <input
                         type="email"
                         id="email"
-                        placeholder='Consult@mail.com'
+                        placeholder='******@mail.com'
                         className={`form-control rounded-pill ${errors.email ? 'is-invalid' : ''}`}
                         value={email}
                         onChange={handleEmailChange}

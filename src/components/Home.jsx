@@ -1,8 +1,72 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Image2 from '../Assets/Newsletter.svg'
 import Header from './Header'
+import { makeApiCall } from '../Services/Api';
 const Home = () => {
+
+  const [modal, setModal] = useState('')
+
+  const queryParams = new URLSearchParams(window.location.search);
+  const token = queryParams.get('token');
+  const sessionId = queryParams.get('sessionid');
+  const virtualId = queryParams.get('virtualid');
+  const bankName = queryParams.get('bankName');
+
+  if (token) {
+    sessionStorage.setItem('token', token)
+  }
+
+  useEffect(() => {
+    if (token || sessionId) {
+      const data = {
+        applicationId: "pwa1",
+        token: token ? token : '',
+        virtualId: virtualId ? virtualId : '',
+        SessionId: sessionId ? sessionId : '',
+        bName: bankName ? bankName : '',
+        deviceType: "WEB",
+        GenerateSessionInfo: sessionId ? true : false,
+      }
+      makeApiCall('validateToken', data)
+      .then((response) => {
+        console.log("resp",response.data)
+        if(sessionId){
+        if(response.data?.data[0]?.token){
+          sessionStorage.setItem('token', response.data.data[0].token)
+          window.location.reload();
+          
+        }
+        else if(!sessionStorage.getItem('token')){
+          if(!modal){
+            setModal('failed')
+          }
+        }
+        }
+        if(token){
+          if(!response.data?.data[0]?.token){
+            sessionStorage.setItem('token','')
+            if(!modal){
+              setModal('failed')
+            }
+            
+          }
+        }
+      })
+      .catch((e) => console.log("err", e))
+
+    }
+    else{
+      if(!sessionStorage.getItem('token')){
+        if(!modal){
+          setModal('failed')
+        }
+      }
+    }
+
+  },[]);
+
+
   const navigate = useNavigate();
 
   const handleContinue = () => {
@@ -19,7 +83,7 @@ const Home = () => {
                 <img src={Image2} alt='Thank you' className="img-fluid rounded  mb-4" style={{width:'25em', height:'auto'}}></img>
                 <div className='text-center card rounded-4 card-1' style={{width:'15em', height:'auto'}}>
                     
-                    <p>Asistent tax filing at aferdabale cost</p>
+                    <p>Assistant tax filing at affordabale cost</p>
                     <h1>
                         <span>
                         <strong><del>₹ 999</del><span style={{fontSize:'30px', color:'#ffc32b'}}> @ ₹ 699</span></strong>

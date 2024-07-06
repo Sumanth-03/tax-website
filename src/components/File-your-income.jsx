@@ -5,6 +5,7 @@ import icon from '../Assets/Icon.svg';
 import ToggleIconSelected from '../Assets/IconSelected.svg';
 import ToggleIcon from '../Assets/IconUnSelected.svg';
 import Inputs from './fileYourIncome-Inputs';
+import { makeApiCallWithAuth } from '../Services/Api';
 
 const FileYourIncome = () => {
   const navigate = useNavigate();
@@ -54,7 +55,36 @@ const FileYourIncome = () => {
     })
   }
   const handleContinue = () => {
-    navigate('/process');
+    makeApiCallWithAuth('getPricing',{income: 11})
+    .then((response) => {
+      console.log(response?.data)
+      if(response?.data?.data){
+        sessionStorage.setItem('pricing',JSON.stringify(response.data.data[0]))
+        navigate('/process');
+      }
+      // if(response?.data?.data?.url){
+      //   let paymenturl = response.data.data.url;
+      //   setIsloading(false);
+      //   window.location.href = paymenturl;
+      //   }
+      // else if(response?.data?.status === 200){
+      //   sessionStorage.setItem('coupon',JSON.stringify(response.data.data))
+      //   setIsloading(false);
+      //   navigate('/redeem')
+      // }
+      // else{
+      //   setIsloading(false);
+      //   if(!modal){
+      //     setModal('failed')
+      //     setErrmessage(response.data?.message)
+      //     //setIsloading(false);
+      //     }
+      // }
+       
+    })
+    .catch((e) => {console.log("err", e);})
+   
+    
   };
 
   return (
@@ -71,7 +101,7 @@ const FileYourIncome = () => {
                 <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
                     <button className="btn  w-100" type="button" onClick={toggleDropdown}>
                     <img src={icon} alt="Icon" className="me-2 float-start" />
-                    <span>Salaried income</span>
+                    <span>Salaried Income</span>
                     {dropdownOpen ? 
                         <span className='float-end'><span className='green-text'>Select</span><img src={ToggleIconSelected} alt="Toggle Icon Open" className="ms-2" /></span> :
                         <span className='float-end'><span className='gray-text'>Select</span><img src={ToggleIcon} alt="Toggle Icon Closed" className="ms-2" /></span>
@@ -84,7 +114,7 @@ const FileYourIncome = () => {
                             <input type="radio" name="options" value="option1" className="form-check-input float-end radio-input"  
                             onClick={()=>handleRadioClick('One form 16')}
                             />
-                            One form 16
+                            Single Form 16
                         </label>
                         </div>
                         <div className="dropdown-item p-2 rm-blue-blink">
@@ -92,15 +122,81 @@ const FileYourIncome = () => {
                             <input type="radio" name="options" value="option2" className="form-check-input float-end radio-input"  
                             onClick={()=>handleRadioClick('More than one form 16')}
                             />
-                            More than one form 16
+                            Multiple Form 16
                         </label>
                         </div>
                     </div>
                     )}
                 </section>
-                <Inputs inputName={'Capital gains'} setValue={setValue}></Inputs>
-                <Inputs inputName={'House rental income'} setValue={setValue}></Inputs>
-                <Inputs inputName={'Business income'} setValue={setValue}></Inputs>
+                
+
+                <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
+                    <button className="btn  w-100" type="button" onClick={toggleDropdown}>
+                    <img src={icon} alt="Icon" className="me-2 float-start" />
+                    <span>Property Rental Income</span>
+                    {dropdownOpen ? 
+                        <span className='float-end'><span className='green-text'>Select</span><img src={ToggleIconSelected} alt="Toggle Icon Open" className="ms-2" /></span> :
+                        <span className='float-end'><span className='gray-text'>Select</span><img src={ToggleIcon} alt="Toggle Icon Closed" className="ms-2" /></span>
+                    }    
+                    </button>
+                    {dropdownOpen && (
+                    <div className="dropdown-menu show position-static w-100">
+                        <div className="dropdown-item border-bottom p-2 ">
+                        <label className="form-check radio">
+                            <input type="radio" name="options" value="option1" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick('One form 16')}
+                            />
+                            One House / Property
+                        </label>
+                        </div>
+                        <div className="dropdown-item p-2 rm-blue-blink">
+                        <label className="form-check radio">
+                            <input type="radio" name="options" value="option2" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick('More than one form 16')}
+                            />
+                            Multiple Houses / Properties
+                        </label>
+                        </div>
+                    </div>
+                    )}
+                </section>
+
+
+                <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
+                    <button className="btn  w-100" type="button" onClick={toggleDropdown}>
+                    <img src={icon} alt="Icon" className="me-2 float-start" />
+                    <span className=''>Capital Gain on Sale of Shares</span>
+                    {dropdownOpen ? 
+                        <span className='float-end'><span className='green-text'>Select</span><img src={ToggleIconSelected} alt="Toggle Icon Open" className="ms-2" /></span> :
+                        <span className='float-end'><span className='gray-text'>Select</span><img src={ToggleIcon} alt="Toggle Icon Closed" className="ms-2" /></span>
+                    }    
+                    </button>
+                    {dropdownOpen && (
+                    <div className="dropdown-menu show position-static w-100">
+                        <div className="dropdown-item border-bottom p-2 ">
+                        <label className="form-check radio">
+                            <input type="radio" name="options" value="option1" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick('One form 16')}
+                            />
+                            Upto 100 Transactions
+                        </label>
+                        </div>
+                        <div className="dropdown-item p-2 rm-blue-blink">
+                        <label className="form-check radio">
+                            <input type="radio" name="options" value="option2" className="form-check-input float-end radio-input"  
+                            onClick={()=>handleRadioClick('More than one form 16')}
+                            />
+                            More than 100 Transactions
+                        </label>
+                        </div>
+                    </div>
+                    )}
+                </section>
+
+
+                 <Inputs inputName={'Other Business Income / Talk to Our expert'} setValue={setValue}></Inputs>
+                {/*<Inputs inputName={'House rental income'} setValue={setValue}></Inputs>
+                <Inputs inputName={'Business income'} setValue={setValue}></Inputs> */}
             </div>
 
             <footer className={`text-center rounded-top ${clickedAny ? 'fixed-footer':''}`}>

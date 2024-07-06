@@ -6,6 +6,7 @@ import icon from '../Assets/Icon.svg';
 
 function Inputs ({inputName, setValue}){
     const [isSelected, setisSelected] = useState(false);
+
     const handleClick = () =>{
         setValue(inputName)
         setisSelected((pre)=>{
