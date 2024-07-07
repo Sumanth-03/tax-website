@@ -83,10 +83,10 @@ const Home = () => {
                 <img src={Image2} alt='Thank you' className="img-fluid rounded  mb-4" style={{width:'25em', height:'auto'}}></img>
                 <div className='text-center card rounded-4 card-1' style={{width:'15em', height:'auto'}}>
                     
-                    <p>Assistant tax filing at affordabale cost</p>
+                    <p>Assisted tax filing at affordabale cost</p>
                     <h1>
                         <span>
-                        <strong><del>₹ 999</del><span style={{fontSize:'30px', color:'#ffc32b'}}> @ ₹ 699</span></strong>
+                        <span style={{fontSize:'14px', color:'#ffffff'}}>Starting </span> <strong><del> ₹ 999</del><span style={{fontSize:'30px', color:'#ffc32b'}}> @ ₹ 399</span></strong>
                         </span>
                     </h1>
                     
