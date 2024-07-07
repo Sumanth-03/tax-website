@@ -33,3 +33,9 @@
     height: 40px;
     animation: flight-spin 1s linear infinite;
   }
+
+  .main-contain{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; 
+  }

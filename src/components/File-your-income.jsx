@@ -140,7 +140,7 @@ const FileYourIncome = () => {
   };
 
   return (
-    <>
+    <div className="main-contain">
     <Header action='/'/>
     <div className="container">
     {isloading && <div className="spinner-overlay z-30">
@@ -271,7 +271,7 @@ const FileYourIncome = () => {
         </div>
       </div>
     </div>
-    </>
+    </div>
   );
 };
 
