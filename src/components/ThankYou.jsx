@@ -4,6 +4,7 @@ import logo from '../Assets/Logo.svg'
 import Image1 from '../Assets/thank you.svg'
 
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 const ThankYou = () => {
     const navigate = useNavigate();
@@ -12,15 +13,9 @@ const ThankYou = () => {
       navigate('/');
   };
   return (
-    <>
-        <header className="d-flex align-items-center p-3 bg-dark text-white">
-            <img src={logo} alt="Logo" className="logo me-3" />
-        </header>
-        <section className="text-center">
-            <img src={Image1} alt="header-image" className="img-fluid w-100" 
-                style={{ maxHeight: '60vh', maxWidth: '1000px' }}
-            />
-        </section>
+    <> 
+     <Header action='/'></Header>
+       
         <div className='m-2 mt-4 text-center '>
             <div className='image-container'>
                 <img src={img} alt='Thank you'></img>

@@ -127,7 +127,7 @@ const Process = () => {
 
   return (
     <>
-    <Header></Header>
+    <Header action='/file-your-income'></Header>
     <div className="container">
     {isloading && <div className="spinner-overlay z-30">
           <div className="spinner-container">

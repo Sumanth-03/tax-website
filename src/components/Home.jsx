@@ -75,7 +75,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header></Header>
+      <Header action='/exitpwa'></Header>
 
       <main className="container mt-4 text-center">
         <div className='m-2 mt-4 text-center '>

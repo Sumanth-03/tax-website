@@ -135,7 +135,7 @@ const FileYourIncome = () => {
 
   return (
     <>
-    <Header />
+    <Header action='/'/>
     <div className="container">
     {isloading && <div className="spinner-overlay z-30">
           <div className="spinner-container">
