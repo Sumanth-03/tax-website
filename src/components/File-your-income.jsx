@@ -60,6 +60,12 @@ const FileYourIncome = () => {
       let newInc = [...incomes];
       if(newInc[3] === 0){
         newInc[3] = 41;
+        newInc[0] = 0;
+        newInc[1] = 0;
+        newInc[2] = 0;
+        
+        let newDrop = [false, false, false];
+        setDropdownOpen(newDrop);
       }
       else{
         newInc[3] = 0;
