@@ -141,24 +141,44 @@ const Process = () => {
             <div className='mb-2 p-3'>
                 <section className="m-4">
                     <h1>Process</h1>
-                    <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique aliquid laborum earum?</p>
+                    <p className="mb-4">Please review and proceed to pay. Our expert will get back to you soon. </p>
                 </section>
+                {inco.includes(11) && 
                 <div>
                     <img src={icon} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
-                    <span>One form 16</span>
-                </div>
+                    <span className="align-top">Single Form 16</span>
+                </div>}
+                {inco.includes(12) &&
                 <div>
                     <img src={icon} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
-                    <span>Capital gain</span>
-                </div>
+                    <span className="align-top">Multiple Form 16</span>
+                </div>}
+                {inco.includes(21) &&
                 <div>
                     <img src={icon} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
-                    <span>More than one form 16</span>
-                </div>
+                    <span className="align-top">One House / Property</span>
+                </div>}
+                {inco.includes(22) &&
+                <div>
+                    <img src={icon} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
+                    <span className="align-top">Multiple Houses / Properties</span>
+                </div>}
+                {inco.includes(31) &&
+                <div>
+                    <img src={icon} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
+                    <span className="align-top">Upto 100 Transactions</span>
+                </div>}
+                {inco.includes(32) &&
+                <div>
+                    <img src={icon} alt="Icon" className="img-fluid me-3 " style={{ maxWidth: '50px' }} />
+                    <span className="align-top">More than 100 Transactions</span>
+                </div>}
+                {inco.includes(41) &&
                 <div>
                     <img src={iconLast} alt="Icon" className="img-fluid me-3" style={{ maxWidth: '50px' }} />
-                    <span>Business income</span>
-                </div>
+                    <span className="align-top">Other Business Income / Talk to Our expert</span>
+                </div>}
+
                 <section className='m-1 p-4 border'>
                     <span><strong>Amount</strong></span>
                     <span className='float-end'>

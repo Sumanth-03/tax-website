@@ -148,7 +148,7 @@ const FileYourIncome = () => {
         <div className="col-12 col-lg-6 bg-color-gray" >
             <section className="m-4">
                 <h1>File Your Income</h1>
-                <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique aliquid laborum earum?</p>
+                <p className="mb-4">Choose all the income types of you from below and we will deliver the best pricing.</p>
             </section>
             <div  className ={`custom-container overflow-auto ${ clickedAny ? 'extra-height':''}` }>
                 <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
