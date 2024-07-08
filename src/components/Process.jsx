@@ -186,7 +186,7 @@ const Process = () => {
                     </span>
                 </section>
             </div>
-            <footer className='bg-color-gray m-0 p-4'>
+            <footer className='bg-color-gray m-0 p-4 fixed-footer'>
                 <form onSubmit={handleSubmit} className='mt-2'>
                     <div className="mb-3">
                     <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
