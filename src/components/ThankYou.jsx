@@ -14,7 +14,7 @@ const ThankYou = () => {
   };
   return (
     <> 
-     <Header action='/'></Header>
+     <Header action='/' imag='1'></Header>
        
         <div className='m-2 mt-4 text-center '>
             <div className='image-container'>

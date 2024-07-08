@@ -140,9 +140,9 @@ const FileYourIncome = () => {
   };
 
   return (
-    <div className="main-contain">
+    <div className="">
     <Header action='/'/>
-    <div className="container">
+    <div className="">
     {isloading && <div className="spinner-overlay z-30">
           <div className="spinner-container">
             <div class="spinner-border" role="status">

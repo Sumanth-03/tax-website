@@ -139,7 +139,7 @@ const Process = () => {
       <div className="row justify-content-center">
         <div className="col-12 col-lg-6 p-0">
             <div className='mb-2 p-3'>
-                <section className="m-4">
+                <section className="m-1">
                     <h1>Process</h1>
                     <p className="mb-4">Please review and proceed to pay. Our expert will get back to you soon. </p>
                 </section>

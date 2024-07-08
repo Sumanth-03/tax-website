@@ -75,7 +75,7 @@ const Home = () => {
 
   return (
     <div>
-      <Header action='/exitpwa'></Header>
+      <Header action='/exitpwa' imag='1'></Header>
 
       <main className="container mt-4 text-center">
         <div className='m-2 mt-4 text-center '>

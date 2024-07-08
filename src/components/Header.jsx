@@ -13,11 +13,12 @@ function Header (params){
                 <img src={back} alt="Logo" className="logo me-3" onClick={()=>{navigate(params.action)}}/>
                 <span>TAXFILE</span>
             </header>
+            {(params.imag === '1') &&
             <section className="text-center">
                 <img src={Image1} alt="header-image" className="img-fluid w-100" 
                   style={{ maxHeight: '60vh', maxWidth: '1000px' }}
                 />
-            </section>
+            </section> }
             
         </>
     )

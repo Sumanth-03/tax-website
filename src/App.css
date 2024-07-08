@@ -54,10 +54,10 @@
   border-color: #4eaf4e;
 }
 .custom-container{
-  height: 265px;
+  height:48%;
 }
 .extra-height{
-  height: 1000px;
+  height: 0%;
 }
 .image-container{
   position: relative;
