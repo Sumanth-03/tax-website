@@ -156,7 +156,7 @@ const FileYourIncome = () => {
                 <h1>File Your Income</h1>
                 <p className="mb-4">Choose all the income types of you from below and we will deliver the best pricing.</p>
             </section>
-            <div  className ={`custom-container overflow-auto ${ clickedAny ? '':''}` }>
+            <div  className ={`custom-container overflow-auto mb-13 ${ clickedAny ? '':''}` }>
                 <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
                     <button className="btn  w-100" type="button" onClick={()=>{toggleDropdown(0)}}>
                     <img src={icon} alt="Icon" className="me-2 float-start" />
@@ -257,7 +257,7 @@ const FileYourIncome = () => {
                 {/*<Inputs inputName={'House rental income'} setValue={setValue}></Inputs>
                 <Inputs inputName={'Business income'} setValue={setValue}></Inputs> */}
             </div>
-
+            <div>
             <footer className={`text-center rounded-top fixed-footer ${clickedAny ? 'fixed-footer':''}`}>
                 <p className="m-4">
                     <span style={{ color: 'lightgray' }}>*By clicking the Continue button you are agreeing to </span>
@@ -268,6 +268,8 @@ const FileYourIncome = () => {
                     Continue
                 </button>
             </footer>
+            </div>
+            
         </div>
       </div>
     </div>

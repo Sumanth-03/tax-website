@@ -14,7 +14,7 @@ function Inputs ({inputName, setValue}){
         });
     }
     return(
-      <section className="p-2 rounded-3 mt-4 bg-color-white">
+      <section className="p-2 rounded-3 mt-4 bg-color-white mb-4">
         <button className="btn  w-100" type="button" onClick={handleClick} >
           <img src={icon} alt="Icon" className="me-2 float-start" />
           {inputName}

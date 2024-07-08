@@ -138,7 +138,7 @@ const Process = () => {
       </div>}
       <div className="row justify-content-center">
         <div className="col-12 col-lg-6 p-0">
-            <div className='mb-2 p-3'>
+            <div className='p-3 overflow-auto mb-18 custom-container-1'>
                 <section className="m-1">
                     <h1>Process</h1>
                     <p className="mb-4">Please review and proceed to pay. Our expert will get back to you soon. </p>
@@ -186,6 +186,7 @@ const Process = () => {
                     </span>
                 </section>
             </div>
+            <div>
             <footer className='bg-color-gray m-0 p-4 fixed-footer'>
                 <form onSubmit={handleSubmit} className='mt-2'>
                     <div className="mb-3">
@@ -215,6 +216,8 @@ const Process = () => {
                     <div className='text-center'><button type="submit"  className="align-content-center btn button-1 rounded-pill m-2">Continue Pay</button></div>
                 </form>
             </footer>
+            </div>
+            
         </div>
       </div> 
     </div>

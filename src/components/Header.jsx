@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 function Header (params){
     console.log('par',params)
     const navigate =useNavigate();
+
     return(
         <>
-            <header className="d-flex align-items-center p-3 bg-dark text-white">
+            <header className="d-flex align-items-center p-3 bg-dark text-white fixed-top">
                 <img src={back} alt="Logo" className="logo me-3" onClick={()=>{navigate(params.action)}}/>
                 <span>TAXFILE</span>
             </header>
