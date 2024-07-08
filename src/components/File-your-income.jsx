@@ -85,6 +85,8 @@ const FileYourIncome = () => {
     // })
     let newInc = [...incomes];
     newInc[pos] = value;
+    newInc[3] = 0;
+    
     setIncomes(newInc);
 
   }
@@ -253,7 +255,7 @@ const FileYourIncome = () => {
                 </section>
 
 
-                 <Inputs inputName={'Other Business Income / Talk to Our expert'} setValue={setValue}></Inputs>
+                 <Inputs inputName={'Other Business Income / Talk to Our expert'} setValue={setValue} selecte={incomes[3]}></Inputs>
                 {/*<Inputs inputName={'House rental income'} setValue={setValue}></Inputs>
                 <Inputs inputName={'Business income'} setValue={setValue}></Inputs> */}
             </div>
