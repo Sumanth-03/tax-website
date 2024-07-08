@@ -150,7 +150,7 @@ const FileYourIncome = () => {
           </div>
           </div>
       </div>}
-      <div className="row justify-content-center bg-color-gray">
+      <div className="row justify-content-center bg-color-gray w-100">
         <div className="col-12 col-lg-6 bg-color-gray" >
             <section className="m-4">
                 <h1>File Your Income</h1>

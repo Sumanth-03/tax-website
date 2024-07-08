@@ -56,9 +56,7 @@
 .custom-container{
   height:70%;
 }
-.custom-container-1{
-  height:90%;
-}
+
 .extra-height{
   height: 20%;
 }
@@ -109,10 +107,10 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   background-color: white;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
-  /* z-index: 1000;  */
+  z-index: 1000; 
   padding: 10px 0 30px 0;
 }
 .mb-13{
@@ -121,3 +119,4 @@
 .mb-18{
   margin-bottom: 18rem;
 }
+
