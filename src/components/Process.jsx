@@ -50,7 +50,8 @@ const Process = () => {
       }
 
     })
-    .catch((e) => {console.log("err", e); setIsloading(false);})
+    .catch((e) => {console.log("err", e); setIsloading(false); setModal('failed');
+      setErrmessage('Something went wrong');})
 
     
     }
@@ -121,7 +122,8 @@ const Process = () => {
       }
        
     })
-    .catch((e) => {console.log("err", e); setIsloading(false);})
+    .catch((e) => {console.log("err", e); setIsloading(false); setModal('failed')
+      setErrmessage('Something went wrong')})
     
   };
 
