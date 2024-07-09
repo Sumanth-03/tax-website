@@ -137,28 +137,25 @@ const FileYourIncome = () => {
     let newInc = [0,0,0,0];
     setIncomes(newInc);
   }
-   
-    
   };
-
   return (
     <div className="">
     <Header action='/'/>
     <div className="">
     {isloading && <div className="spinner-overlay z-30">
           <div className="spinner-container">
-            <div class="spinner-border" role="status">
+            <div className="spinner-border" role="status">
             
           </div>
           </div>
       </div>}
       <div className="row justify-content-center bg-color-gray w-100">
-        <div className="col-12 col-lg-6 bg-color-gray" >
+        <div className="col-12 col-lg-6 bg-color-gray p-0" >
             <section className="m-4">
                 <h1>File Your Income</h1>
                 <p className="mb-4">Choose all the income types of you from below and we will deliver the best pricing.</p>
             </section>
-            <div  className ={`custom-container overflow-auto mb-13 ${ clickedAny ? '':''}` }>
+            <div  className ={`custom-container overflow-auto mb-13 w-100 ${ clickedAny ? '':''}` }>
                 <section className="dropdown mt-4 rounded-3 p-2 bg-color-white">
                     <button className="btn  w-100" type="button" onClick={()=>{toggleDropdown(0)}}>
                     <img src={icon} alt="Icon" className="me-2 float-start" />
@@ -260,13 +257,13 @@ const FileYourIncome = () => {
                 <Inputs inputName={'Business income'} setValue={setValue}></Inputs> */}
             </div>
             <div>
-            <footer className={`text-center rounded-top fixed-footer ${clickedAny ? 'fixed-footer':''}`}>
+            <footer className={`text-center rounded-top fixed-footer`}>
                 <p className="m-4">
                     <span style={{ color: 'lightgray' }}>*By clicking the Continue button you are agreeing to </span>
                     <strong>Terms and Conditions</strong>
                 </p>
                 
-                <button className="btn button-1 rounded-pill m-2" onClick={handleContinue} >
+                <button className="btn button-1 rounded-pill m-2" onClick={handleContinue} disabled={![...incomes].filter(s => s > 0).length >= 1}>
                     Continue
                 </button>
             </footer>

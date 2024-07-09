@@ -187,7 +187,7 @@ const Process = () => {
                 </section>
             </div>
             <div>
-            <footer className='bg-color-gray m-0 p-4'>
+            <div className='bg-color-gray m-0 p-4'>
                 <form onSubmit={handleSubmit} className='mt-2'>
                     <div className="mb-3">
                     <label htmlFor="phoneNumber" className="form-label">Phone Number</label>
@@ -201,7 +201,7 @@ const Process = () => {
                     />
                     {errors.phoneNumber && <div className="invalid-feedback">{errors.phoneNumber}</div>}
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-8">
                     <label htmlFor="email" className="form-label">Email</label>
                     <input
                         type="email"
@@ -213,9 +213,11 @@ const Process = () => {
                     />
                     {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                     </div>
-                    <div className='text-center'><button type="submit"  className="align-content-center btn button-1 rounded-pill m-2">Continue Pay</button></div>
+                    <footer>
+                      <div className='text-center fixed-footer'><button type="submit" disabled={errors.phoneNumber || errors.email || !phoneNumber || !email} className="align-content-center btn button-1 rounded-pill m-2">Continue Pay</button></div>
+                    </footer>
                 </form>
-            </footer>
+            </div>
             </div>
             
         </div>
