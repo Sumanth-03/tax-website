@@ -112,12 +112,12 @@ const Process = () => {
         }
       
       else{
-        // setIsloading(false);
-        // if(!modal){
-        //   setModal('failed')
-        //   setErrmessage(response.data?.message)
-        //   //setIsloading(false);
-        //   }
+        //setIsloading(false);
+        if(!modal){
+          setModal('failed')
+          setErrmessage(response.data?.message)
+          //setIsloading(false);
+          }
       }
        
     })
@@ -223,6 +223,23 @@ const Process = () => {
         </div>
       </div> 
     </div>
+    {(modal === 'failed') &&
+      <div className="spinner-overlay z-30">
+      <div className="spinner-container2">
+        <form>
+        <div className="form-group mx-auto">
+        <h3><span className="">{errmessage}</span></h3>
+        </div>
+         
+        <button className="btn m-2 rounded-pill button-1" onClick={()=>{setModal('')}}>
+            OK
+        </button>
+        
+        </form>
+      </div>
+      </div>
+
+      }
     </>
   );
 };

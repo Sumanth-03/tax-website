@@ -99,6 +99,23 @@ const Home = () => {
           </button>
         </div>
       </main>
+      {(modal === 'failed') &&
+      <div className="spinner-overlay z-30">
+      <div className="spinner-container2">
+        <form>
+        <div className="form-group mx-auto">
+        <h3><span className="">Invalid Session Found.</span></h3>
+        </div>
+         
+        <button className="btn m-2 rounded-pill button-1" onClick={()=>{navigate('/exitpwa')}}>
+            Exit
+        </button>
+        
+        </form>
+      </div>
+      </div>
+
+      }
 
     </div>
     
